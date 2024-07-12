@@ -1,0 +1,20 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}Subtask Detail{% endblock %}
+
+{% block content %}
+<h4>Subtask Detail</h4>
+    <div class="container">
+
+        <h5>{{ subtask.title }}</h5>
+        <p>{{ subtask.description }}</p>
+        <p>Deadline: {{ subtask.due_date }}</p>
+        <p>Status: {{ subtask.is_completed }}</p>
+        <a href="{% url 'task_detail' pk=subtask.task.pk %}"  class="btn btn-secondary">Back to Task</a>
+
+
+    </div>
+
+
+
+{% endblock %}

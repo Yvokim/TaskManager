@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SubTask Delete</title>
+</head>
+<body>
+
+    <!-- tasks/task_confirm_delete.html -->
+<div class="card">
+    <div class="card-header">
+        <h4>Delete Task</h4>
+    </div>
+    <div class="card-body">
+        <p>Are you sure you want to delete the subtask "{{ subtask.title }}"?</p>
+        <form method="POST" action="{% url 'subtask_delete' task_pk=task.pk subtask_pk=subtask.pk  %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{% url 'subtask_detail' subtask_pk=subtask.pk task_pk=task.pk %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

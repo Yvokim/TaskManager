@@ -1,0 +1,58 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+<h4>Task Detail</h4>
+    <div class="container">
+
+        <a href="{% url 'task_detail' pk=task.pk %}">{{task.name}}</a>
+        <p>{{task.description}}</p>
+        <p>Deadline: {{task.deadline}}</p>
+        <p>Status:{{task.get_status_display}}</p>
+        <p>Assigned to:{{task.assigned_to}}</p>
+       <h5>Subtasks</h5>
+        <ul>
+
+            {% for subtask in subtasks %}
+            <li>
+                <a  href="{% url 'subtask_detail'  task_pk=task.pk subtask_pk=subtask.pk %}" >{{subtask.title}}</a>
+                <form method="POST"  action="{% url 'subtask_confirm_delete' task_pk=task.pk subtask_pk=subtask.pk %}" style="dipslay:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+
+
+
+                </form>
+
+
+
+            </li>
+            {% endfor %}
+
+
+
+
+
+        </ul>
+
+
+
+
+
+    </div>
+
+<a href="{% url 'subtask_create' task_pk=task.pk %}" >Create New Subtask</a>
+<a href="{% url 'task_edit' pk=task.pk %}"  class="btn btn-primary">Edit</a>
+<a href="{% url 'task_list'%}" class="btn btn-secondary">Back to List</a>
+<form method="POST" action="{% url 'task_confirm_delete' pk=task.pk %}" style="display:inline;">
+
+    {% csrf_token %}
+    <button type="submit"  class="btn btn-danger">Delete?</button>
+
+
+
+</form>
+
+
+{% endblock %}
